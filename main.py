@@ -9,7 +9,7 @@ print("Welcome to the Banking System")
 
 # user input for creating an account
 name = input("Enter your name: ")
-initial_balance = float(input("Please enter your initial deposit: "))
+initial_balance = float(input("Please enter your first deposit: "))
 account = Account(name, initial_balance)
 
 # menu loop
