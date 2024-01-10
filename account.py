@@ -43,47 +43,48 @@ def log_withdraw(func):
 
     return wrapper
 
-
-
-
 class Account:
     transaction_id_counter = 1
 
-    # Constructor
-    def __init__(self, name, initial_balance):
+    def __init__(self, account_id, name, mobile_number, email, city, state, pincode, initial_balance):
+        # Initialize account attributes
+        self.account_id = account_id
         self.name = name
+        self.mobile_number = mobile_number
+        self.email = email
+        self.city = city
+        self.state = state
+        self.pincode = pincode
         self._balance = initial_balance
-        self._history = []  # Transaction history list
+        self._history = []
 
-    # Method to generate a unique transaction ID
     def generate_transaction_id(self):
+        # Generate a unique transaction ID based on timestamp and counter
         timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
         transaction_id = f"{timestamp}{Account.transaction_id_counter:00d}"
         Account.transaction_id_counter += 1
         return transaction_id
 
-    # Decorate the deposit method with the log_deposit decorator
     @log_deposit
     def deposit(self, amount):
-        # Increase balance by the deposit amount
+        # Increase balance with a deposit
         self._balance += amount
 
-    # Decorate the withdraw method with the log_withdraw decorator
     @log_withdraw
     def withdraw(self, amount):
-        # Check if there are sufficient funds
+        # Check for sufficient funds before withdrawing
         if amount > self._balance:
             print("Insufficient funds. Withdrawal canceled.")
         else:
-            # Decrease balance by the withdrawal amount
+            # Decrease balance with a withdrawal
             self._balance -= amount
 
-    # Display the current balance
     def display_balance(self):
-        print(f"Balance: ₹{self._balance}")
+        # Display current account balance
+        print(f"Account ID: {self.account_id}, Balance: ₹{self._balance}")
 
-    # Display the transaction history
     def display_transaction_history(self):
+        # Display transaction history
         if not self._history:
             print("No transaction history.")
         else:
@@ -95,4 +96,5 @@ class Account:
                     transaction["id"], transaction["action"],
                     transaction["timestamp"], transaction["amount"],
                     transaction["balance"]))
+
 
