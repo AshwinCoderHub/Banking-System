@@ -54,7 +54,7 @@ class BankingSystem:
 if __name__ == "__main__":
     print("Welcome to the Banking System")
 
-    banking_system = BankingSystem("GlobalBank")
+    banking_system = BankingSystem("")
 
     while True:
         print("\nMenu: a. Create Account b. Access Account c. Display All Accounts d. Exit")
